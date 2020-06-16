@@ -5,10 +5,52 @@
 }
 
 body {
-  font-size: 16px;
-  font-family: $font-overpass;
   background-color: $color-ebony-clay;
   color: $color-white;
+  font-size: 16px;
+  font-family: $font-overpass;
+  line-height: $line-height-default;
+}
+
+p {
+  margin-bottom: 1.15rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 2.75rem 0 1.05rem;
+  font-family: $font-domine;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-heading;
+}
+
+h1 {
+  margin-top: 0;
+  font-size: 4.209em;
+}
+
+h2 {
+  font-size: 3.157em;
+}
+
+h3 {
+  font-size: 2.369em;
+}
+
+h4 {
+  font-size: 1.777em;
+}
+
+h5 {
+  font-size: 1.333em;
+}
+
+small,
+.text_small {
+  font-size: 0.75em;
 }
 
 a {

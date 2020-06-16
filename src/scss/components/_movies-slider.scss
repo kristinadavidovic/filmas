@@ -1,0 +1,28 @@
+// slider
+.movie-slider__movies {
+  display: flex;
+  margin-top: 40px;
+}
+
+// slider item
+.movie-slider__item {
+  position: relative;
+}
+
+.movie-slider__item-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px 15px;
+  text-align: center;
+
+  div {
+    width: 100%;
+  }
+}
+
+.movie-slider__item-title {
+}
+
+.movie-slider__item-date-released {
+}

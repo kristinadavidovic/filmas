@@ -1,41 +1,28 @@
 <template>
   <div class="home">
-    <h2>Trending movies this week.</h2>
-    <div v-for="movie in movies" :key="movie.id">
-      <movie :movie="movie"></movie>
-    </div>
+    <movies-slider
+      :movies="moviesTrendingWeek"
+      title="Popular movies this week"
+    ></movies-slider>
   </div>
 </template>
 
 <script>
-// 3rd
-import axios from 'axios';
 // components
-import Movie from '../components/card/Movie';
+import MoviesSlider from '../components/MoviesSlider';
+// models
+import Movie from '../models/Movie';
 
 export default {
   name: 'Home',
-  components: {
-    Movie
-  },
-  data() {
-    return {
-      movies: []
-    };
+  components: { MoviesSlider },
+  computed: {
+    moviesTrendingWeek() {
+      return Movie.getTrendingWeek();
+    }
   },
   mounted() {
-    // get latest trending movies
-    axios
-      .get(
-        'https://api.themoviedb.org/3/trending/movie/week?api_key=69e4613562492d3cc5726b7b65888503'
-      )
-      .then(response => {
-        if (!response) return;
-
-        const { data } = response;
-        const { results } = data;
-        this.movies = results;
-      });
+    Movie.fetch();
   }
 };
 </script>

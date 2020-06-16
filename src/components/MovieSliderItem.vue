@@ -1,16 +1,19 @@
 <template>
-  <div class="movie">
-    <span class="movie__date-released">{{ movie.release_date }}</span>
-    <h2 class="movie__title">
-      {{ movie.title }}
-      <span v-if="showOriginalTitle" class="movie__title-original">
-        ({{ movie.original_title }})
-      </span>
-    </h2>
-    <img
-      :src="`${imgBaseUrl}${posterSize}${movie.poster_path}`"
-      :alt="`${movie.title} poster image`"
-    />
+  <div class="movie-slider__item">
+    <div class="movie-slider__item-poster">
+      <img
+        :src="`${imgBaseUrl}${posterSize}${movie.poster_path}`"
+        :alt="`${movie.title} poster image`"
+      />
+    </div>
+    <div class="movie-slider__item-info">
+      <div class="movie-slider__item-title">
+        {{ movie.title }}
+      </div>
+      <div class="movie-slider__item-date-released">
+        {{ movie.release_date }}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -19,7 +22,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'Movie',
+  name: 'MovieSliderItem',
   props: {
     movie: {
       required: true,
@@ -31,11 +34,6 @@ export default {
       imgBaseUrl: null,
       posterSize: null
     };
-  },
-  computed: {
-    showOriginalTitle() {
-      return this.movie.title != this.movie.original_title;
-    }
   },
   mounted() {
     // get movie images
