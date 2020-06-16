@@ -4,7 +4,24 @@ $font-domine: 'Domine', serif;
 $font-overpass: 'Overpass', sans-serif;
 
 // font weights
+$font-weight-thin: 100;
+$font-weight-extra-light: 200;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+$font-weight-black: 900;
 
 // colors
 $color-white: #ffffff;
+$color-casper: #aabbcc;
+$color-aquamarine: #50ffb1;
+$color-bright-gray: #393e46;
+$color-ebony-clay: #2c3440;
 $color-black: #000000;
+
+// transitions
+$duration-fast: 0.2s;
+$duration-regular: 0.3s;
+$duration-slow: 0.6s;

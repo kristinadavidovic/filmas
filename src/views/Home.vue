@@ -1,8 +1,5 @@
 <template>
   <div class="home">
-    <h1>
-      This is a home page.
-    </h1>
     <h2>Trending movies this week.</h2>
     <div v-for="movie in movies" :key="movie.id">
       <movie :movie="movie"></movie>

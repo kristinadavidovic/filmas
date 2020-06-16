@@ -7,5 +7,22 @@
 body {
   font-size: 16px;
   font-family: $font-overpass;
-  background-color: $color-white;
+  background-color: $color-ebony-clay;
+  color: $color-white;
+}
+
+a {
+  color: $color-aquamarine;
+  text-decoration: none;
+  transition: $duration-regular color;
+
+  &:hover {
+    color: $color-casper;
+  }
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
