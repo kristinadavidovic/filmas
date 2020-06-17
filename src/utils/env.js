@@ -6,6 +6,10 @@ const envs = [
   {
     name: 'api-key',
     originalName: 'VUE_APP_API_KEY'
+  },
+  {
+    name: 'movies-pages',
+    originalName: 'VUE_APP_MOVIES_PAGES'
   }
 ];
 

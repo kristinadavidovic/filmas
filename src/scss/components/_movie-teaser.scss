@@ -1,0 +1,54 @@
+.movie-teaser__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: $border-radius-default;
+  border: 1px solid $color-pattens-blue--03;
+}
+
+.movie-teaser__item-link {
+  display: block;
+  transition: $duration-fast transform $easing-default;
+  transform: scale(1);
+
+  // teaser on slider
+  .movie-slider__item & {
+    &:hover {
+      transform: scale(1.1);
+
+      .movie-teaser__item-info {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+  }
+
+  // teaser on grid
+  .movies__all-movie & {
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.movie-teaser__item-info {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 10px 15px;
+  background-color: $color-black--06;
+  text-align: center;
+  transform: translate3d(0, 100%, 0);
+  transition: $duration-fast transform $easing-default;
+
+  div {
+    width: 100%;
+  }
+}
+
+.movie-teaser__item-title {
+  color: $color-casper;
+  font-weight: $font-weight-extra-bold;
+}

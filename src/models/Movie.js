@@ -2,6 +2,7 @@
 import { Model } from '@vuex-orm/core';
 // utils
 import { api } from '../utils/api';
+import env from '../utils/env';
 import {
   API_ENDPOINT_MOVIE_DETAILS,
   API_ENDPOINT_MOVIE_DISCOVER,
@@ -35,19 +36,23 @@ class Movie extends Model {
   // api calls
   static async fetch() {
     //? Movie.store().dispatch('wait/start', LOADER_FETCH_MOVIES);
+    const movies = [];
+    const apiString = pageNum =>
+      `${API_ENDPOINT_MOVIE_DISCOVER}${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNum}`;
+    const getPages = env('movies-pages');
 
-    const response = await api.get(
-      `${API_ENDPOINT_MOVIE_DISCOVER}${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
-    );
-    if (!response) return;
-
-    const { data } = response;
-    let { results } = data;
-
-    results = await getImages(results);
+    // TODO: can we improve this?
+    for (let i = 1; i <= getPages; i++) {
+      const response = await api.get(apiString(i));
+      if (!response) return;
+      const { data } = response;
+      let { results } = data;
+      results = await getImages(results);
+      movies.push(results);
+    }
 
     Movie.insert({
-      data: results
+      data: movies.flat()
     });
 
     //? Movie.store().dispatch('wait/end', LOADER_FETCH_MOVIES);
@@ -58,6 +63,7 @@ class Movie extends Model {
       `${API_ENDPOINT_MOVIE_DETAILS}/${id}${API_KEY}`
     );
     let { data } = response;
+
     data = await getImages(data);
 
     Movie.insert({
@@ -68,7 +74,15 @@ class Movie extends Model {
   // getters
   static getAll() {
     return Movie.query()
-      .orderBy('popularity')
+      .orderBy('popularity', 'desc')
+      .orderBy('vote_average', 'desc')
+      .get();
+  }
+
+  static getLimited() {
+    return Movie.query()
+      .orderBy('popularity', 'desc')
+      .limit(20)
       .get();
   }
 

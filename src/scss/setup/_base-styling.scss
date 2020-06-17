@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: $color-ebony-clay;
+  background-color: $color-shark;
   color: $color-white;
   font-size: 16px;
   font-family: $font-overpass;
@@ -79,4 +79,8 @@ hr {
   width: 100%;
   border: 0.005em solid $color-casper;
   margin: 40px auto 50px;
+}
+
+.content {
+  padding: 40px 0 50px;
 }

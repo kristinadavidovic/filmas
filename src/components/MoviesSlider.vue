@@ -11,7 +11,7 @@
         >
       </div>
     </div>
-    <div class="movie-slider__movies" v-if="">
+    <div class="movie-slider__movies">
       <swiper
         ref="moviesSlider"
         :options="swiperOptions"
@@ -56,7 +56,6 @@ export default {
   data() {
     return {
       swiperOptions: {
-        loop: true,
         slidesPerView: 8,
         spaceBetween: 20,
         watchOverflow: true

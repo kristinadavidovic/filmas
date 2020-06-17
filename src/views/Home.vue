@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="content content--home">
     <movies-slider
       :movies="moviesAll"
       title="Discover Movies"
@@ -30,7 +30,7 @@ export default {
       return MovieTrending.getTrendingWeek();
     },
     moviesAll() {
-      return Movie.getAll();
+      return Movie.getLimited();
     }
   },
   mounted() {
