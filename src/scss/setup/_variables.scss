@@ -42,3 +42,11 @@ $margin-heading-default: 2.75rem 0 1.05rem;
 
 // other
 $border-radius-default: 5px;
+$movie-fade-gradient: linear-gradient(
+    0deg,
+    rgba(30, 35, 40, 0) 60%,
+    rgba(30, 35, 40, 1) 100%
+  ),
+  linear-gradient(180deg, rgba(30, 35, 40, 0) 60%, rgba(30, 35, 40, 1) 100%),
+  linear-gradient(270deg, rgba(30, 35, 40, 0) 80%, rgba(30, 35, 40, 1) 100%),
+  linear-gradient(90deg, rgba(30, 35, 40, 0) 80%, rgba(30, 35, 40, 1) 100%);
