@@ -45,6 +45,9 @@ export default {
         watchOverflow: true
       }
     };
+  },
+  updated() {
+    this.$refs.moviesSlider.$swiper.update();
   }
 };
 </script>

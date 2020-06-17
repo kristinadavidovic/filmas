@@ -10,7 +10,7 @@
       <div class="movie-slider__item-title">
         {{ movie.title }}
       </div>
-      <div class="movie-slider__item-date-released">
+      <div class="movie-slider__item-date-released text-small">
         {{ movie.release_date }}
       </div>
     </div>

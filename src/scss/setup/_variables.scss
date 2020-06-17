@@ -23,8 +23,13 @@ $color-aquamarine: #50ffb1;
 $color-bright-gray: #393e46;
 $color-ebony-clay: #2c3440;
 $color-black: #000000;
+$color-black--03: rgba($color-black, 0.3);
+$color-black--06: rgba($color-black, 0.6);
 
 // transitions
 $duration-fast: 0.2s;
 $duration-regular: 0.3s;
 $duration-slow: 0.6s;
+
+// easing
+$easing-default: ease-out;
