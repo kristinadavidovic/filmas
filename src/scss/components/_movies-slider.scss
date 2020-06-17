@@ -4,15 +4,30 @@
   margin-top: 40px;
 }
 
+.movie-slider__header {
+  display: flex;
+  align-items: baseline;
+}
+
+.movie-slider__link {
+  display: inline-block;
+  margin-left: 15px;
+}
+
 // slider item
 .movie-slider__item {
   position: relative;
+  overflow: hidden;
 
   &:hover {
     .movie-slider__item-info {
       transform: translate3d(0, 0, 0);
     }
   }
+}
+
+.movie-slider__item-link {
+  display: block;
 }
 
 .movie-slider__item-info {

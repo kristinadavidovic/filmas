@@ -4,8 +4,15 @@ import VueRouter from 'vue-router';
 // views
 import Home from '../views/Home';
 import About from '../views/About';
+import Movies from '../views/Movies';
+import MovieSingle from '../views/MovieSingle';
 // utils
-import { ROUTE_HOME, ROUTE_ABOUT } from '../utils/constants';
+import {
+  ROUTE_HOME,
+  ROUTE_ABOUT,
+  ROUTE_MOVIES,
+  ROUTE_MOVIE
+} from '../utils/constants';
 
 Vue.use(VueRouter);
 
@@ -19,6 +26,17 @@ const routes = [
     path: '/about',
     name: ROUTE_ABOUT,
     component: About
+  },
+  {
+    path: '/movies',
+    name: ROUTE_MOVIES,
+    component: Movies
+  },
+  {
+    path: '/movies/:movieId',
+    name: ROUTE_MOVIE,
+    component: MovieSingle,
+    props: true
   }
 ];
 

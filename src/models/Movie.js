@@ -2,8 +2,12 @@
 import { Model } from '@vuex-orm/core';
 // utils
 import { api } from '../utils/api';
-import { API_ENDPOINT_MOVIE_TRENDING_WEEK } from '../utils/constants';
-import env from '../utils/env';
+import {
+  API_ENDPOINT_MOVIE_DETAILS,
+  API_ENDPOINT_MOVIE_DISCOVER,
+  API_KEY
+} from '../utils/constants';
+import { getImages } from '../utils/helpers';
 
 class Movie extends Model {
   static get entity() {
@@ -33,12 +37,14 @@ class Movie extends Model {
     //? Movie.store().dispatch('wait/start', LOADER_FETCH_MOVIES);
 
     const response = await api.get(
-      `${API_ENDPOINT_MOVIE_TRENDING_WEEK}?api_key=${env('api-key')}`
+      `${API_ENDPOINT_MOVIE_DISCOVER}${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
     );
     if (!response) return;
 
     const { data } = response;
-    const { results } = data;
+    let { results } = data;
+
+    results = await getImages(results);
 
     Movie.insert({
       data: results
@@ -47,11 +53,27 @@ class Movie extends Model {
     //? Movie.store().dispatch('wait/end', LOADER_FETCH_MOVIES);
   }
 
+  static async fetchDetails(id) {
+    const response = await api.get(
+      `${API_ENDPOINT_MOVIE_DETAILS}/${id}${API_KEY}`
+    );
+    let { data } = response;
+    data = await getImages(data);
+
+    Movie.insert({
+      data
+    });
+  }
+
   // getters
-  static getTrendingWeek() {
+  static getAll() {
     return Movie.query()
       .orderBy('popularity')
       .get();
+  }
+
+  static getDetails(id) {
+    return Movie.query().find(id);
   }
 }
 
