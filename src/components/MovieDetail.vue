@@ -37,18 +37,16 @@
             </div>
           </div>
           <div class="movie-detail__title-wrapper">
-            <div
-              class="movie-detail__directors"
-              v-if="directors"
-              v-for="director in directors"
-            >
+            <div class="movie-detail__directors">
               Directed by:
-              <router-link
-                :to="{ name: 'person', params: { personId: director.id } }"
-                class="movie-detail__person-name"
-              >
-                {{ director.name }}
-              </router-link>
+              <span v-if="directors" v-for="director in directors">
+                <router-link
+                  :to="{ name: 'person', params: { personId: director.id } }"
+                  class="movie-detail__person-name"
+                >
+                  {{ director.name }}
+                </router-link>
+              </span>
             </div>
             <h1 class="movie-detail__title">
               {{ movie.title }}
