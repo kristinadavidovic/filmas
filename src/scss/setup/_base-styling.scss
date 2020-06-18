@@ -14,6 +14,8 @@ body {
 
 p {
   margin-bottom: 1.15rem;
+  font-family: $font-chivo;
+  line-height: $line-height-paragraph;
 }
 
 h1,
@@ -54,7 +56,7 @@ h5,
 }
 
 small,
-.text-small {
+.text--small {
   font-size: 0.8em;
 }
 

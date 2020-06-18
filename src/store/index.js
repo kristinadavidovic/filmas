@@ -5,6 +5,8 @@ import VuexORM from '@vuex-orm/core';
 // models
 import Movie from '../models/Movie';
 import MovieTrending from '../models/MovieTrending';
+import Genre from '../models/Genre';
+import MovieGenre from '../models/MovieGenre';
 
 Vue.use(Vuex);
 
@@ -14,6 +16,8 @@ const database = new VuexORM.Database();
 // Register Models to Database.
 database.register(Movie);
 database.register(MovieTrending);
+database.register(Genre);
+database.register(MovieGenre);
 
 const store = new Vuex.Store({
   plugins: [VuexORM.install(database)],

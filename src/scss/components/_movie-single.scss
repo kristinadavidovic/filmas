@@ -1,15 +1,15 @@
-.movie-single {
+.movie-detail {
   position: relative;
 }
 
-.movie-single__backdrop {
+.movie-detail__backdrop {
   position: relative;
   z-index: 0;
   width: 100%;
   height: 675px;
 }
 
-.movie-single__backdrop-image {
+.movie-detail__backdrop-image {
   position: absolute;
   width: 100%;
   height: 99.95%;
@@ -18,7 +18,7 @@
   background-position: top center;
 }
 
-.movie-single__backdrop-fade {
+.movie-detail__backdrop-fade {
   position: relative;
   padding-top: 500px;
 
@@ -38,26 +38,82 @@
   }
 }
 
-.movie-single__content {
+.movie-detail__content {
   position: relative;
   padding-top: 40px;
 }
 
-.movie-single__container {
+.movie-detail__container {
   display: flex;
-
-  > div {
-    width: 100%;
-  }
 }
 
-.movie-single__image-wrapper {
+.movie-detail__info {
+  width: 100%;
+}
+
+.movie-detail__info--left {
   flex: 0 0 calc(100% / 3);
   max-width: calc(100% / 3);
 }
 
-.movie-single__info {
+.movie-detail__info--right {
   flex: 0 1 100%;
   max-width: 100%;
   padding-left: 40px;
+}
+
+.movie-detail__meta {
+  display: flex;
+  margin-bottom: 10px;
+  color: $color-casper;
+  font-family: $font-chivo;
+  font-weight: $font-weight-extra-light;
+}
+
+.movie-detail__runtime {
+  margin-left: 20px;
+}
+
+.movie-detail__genres {
+  margin-left: auto;
+}
+
+.movie-detail__tagline {
+  margin: 20px 0;
+  color: $color-casper;
+  font-family: $font-chivo;
+  text-transform: uppercase;
+}
+
+// Cast & Crew
+.movie-detail__people,
+.movie-detail__person {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: end;
+  font-size: 0.925em;
+}
+
+.movie-detail__person {
+  margin-bottom: 10px;
+}
+
+.movie-detail__person-name {
+  position: relative;
+  grid-column: 1;
+  color: $color-pattens-blue;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px dotted $color-casper;
+  }
+}
+
+.movie-detail__person-role {
+  grid-column: 2;
+  font-weight: $font-weight-extra-light;
 }

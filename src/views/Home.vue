@@ -17,7 +17,7 @@
 
 <script>
 // components
-import MoviesSlider from '../components/MoviesSlider';
+import MoviesSlider from '../components/elements/slider/MoviesSlider';
 // models
 import Movie from '../models/Movie';
 import MovieTrending from '../models/MovieTrending';

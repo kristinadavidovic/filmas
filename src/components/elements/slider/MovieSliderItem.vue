@@ -6,7 +6,7 @@
 
 <script>
 // components
-import MovieTeaser from '../components/MovieTeaser';
+import MovieTeaser from '../../MovieTeaser';
 
 export default {
   name: 'MovieSliderItem',

@@ -12,7 +12,7 @@
           {{ movie.title }}
         </div>
         <div
-          class="movie-teaser__item-date-released text-small"
+          class="movie-teaser__item-date-released text--small"
           v-if="movie.release_date"
         >
           {{ releaseDate }}

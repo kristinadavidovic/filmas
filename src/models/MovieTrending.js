@@ -14,17 +14,22 @@ class MovieTrending extends Model {
     return {
       id: this.attr(null),
       adult: this.boolean(false),
-      backdrop_path: this.string(null),
-      genre_ids: this.attr(null),
-      media_type: this.string('movie'),
+      budget: this.number(0),
       original_language: this.string('en'),
       original_title: this.string(null),
       overview: this.string(null),
       popularity: this.number(null),
-      poster_path: this.attr(null),
+      poster_path: this.string(null),
+      production_companies: this.attr(null),
+      production_countries: this.attr(null),
       release_date: this.attr(null),
+      revenue: this.number(0),
+      runtime: this.number(0),
+      spoken_languages: this.attr(null),
+      status: this.string(''),
       title: this.string(null),
-      vote_average: this.number(null)
+      vote_average: this.number(null),
+      vote_count: this.number(null)
     };
   }
 

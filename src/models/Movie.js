@@ -16,20 +16,34 @@ class Movie extends Model {
   }
 
   static fields() {
+    // todo: fix referenced fields (arrays)
+    // todo: add belongs to collection (HP npr.)
     return {
       id: this.attr(null),
       adult: this.boolean(false),
       backdrop_path: this.string(null),
-      genre_ids: this.attr(null),
+      belongs_to_collection: this.attr(null),
+      budget: this.number(0),
+      credits: this.attr(null),
+      genres: this.attr(null),
+      imdb_id: this.string(0),
       media_type: this.string('movie'),
       original_language: this.string('en'),
       original_title: this.string(null),
       overview: this.string(null),
       popularity: this.number(null),
       poster_path: this.string(null),
+      production_companies: this.attr(null),
+      production_countries: this.attr(null),
       release_date: this.attr(null),
+      revenue: this.number(0),
+      runtime: this.number(0),
+      spoken_languages: this.attr(null),
+      status: this.string(''),
+      tagline: this.string(''),
       title: this.string(null),
-      vote_average: this.number(null)
+      vote_average: this.number(null),
+      vote_count: this.number(null)
     };
   }
 
@@ -42,6 +56,7 @@ class Movie extends Model {
     const getPages = env('movies-pages');
 
     // TODO: can we improve this?
+    // get genres here
     for (let i = 1; i <= getPages; i++) {
       const response = await api.get(apiString(i));
       if (!response) return;
@@ -60,7 +75,7 @@ class Movie extends Model {
 
   static async fetchDetails(id) {
     const response = await api.get(
-      `${API_ENDPOINT_MOVIE_DETAILS}/${id}${API_KEY}`
+      `${API_ENDPOINT_MOVIE_DETAILS}/${id}${API_KEY}&append_to_response=credits`
     );
     let { data } = response;
 
