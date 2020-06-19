@@ -74,7 +74,7 @@ class Movie extends Model {
   }
 
   // TODO: This should be find only. The getting of the movies
-  // needs to get the genres & credits as well & inserted into the store.
+  // needs to get the genres & credits as well & inserted into the store.??
   static async fetchDetails(id) {
     const response = await api.get(
       `${API_ENDPOINT_MOVIE_DETAILS}/${id}${API_KEY}&append_to_response=credits`
@@ -83,8 +83,6 @@ class Movie extends Model {
     let { data } = response;
 
     data = await getImages(data);
-
-    console.log('🚀', data);
 
     Movie.insert({
       data

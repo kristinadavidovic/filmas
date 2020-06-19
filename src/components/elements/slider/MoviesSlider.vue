@@ -1,6 +1,6 @@
 <template>
   <div class="movie-slider">
-    <div class="container">
+    <div class="container" v-if="title">
       <div class="movie-slider__header">
         <h3 class="movie-slider__title">{{ title }}</h3>
         <router-link

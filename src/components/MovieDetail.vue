@@ -91,18 +91,18 @@
                           v-for="person in persons"
                           class="movie-detail__person"
                         >
+                          <div class="movie-detail__person-name">
+                            {{ person.job }}
+                          </div>
                           <router-link
                             :to="{
                               name: 'person',
                               params: { personId: person.id }
                             }"
-                            class="movie-detail__person-name"
+                            class="movie-detail__person-role"
                           >
-                            {{ person.job }}
-                          </router-link>
-                          <div class="movie-detail__person-role">
                             {{ person.name }}
-                          </div>
+                          </router-link>
                         </div>
                       </div>
                     </el-tab-item>

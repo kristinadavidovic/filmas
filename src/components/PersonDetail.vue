@@ -7,47 +7,83 @@
         </h1>
       </div>
       <el-tabs>
-        <el-tab-item name="Credits" :selected="false">
+        <el-tab-item name="Credits" ref="tabCredits">
           <!-- add crew credits -->
           <div class="person-single__credits">
             <div
               v-for="credit in castCredit"
               :key="credit.id"
               class="person-single__credit"
+              v-if="credit.poster_path"
             >
               <movie-teaser :movie="credit"></movie-teaser>
             </div>
           </div>
         </el-tab-item>
-        <el-tab-item name="About" :selected="true">
+        <el-tab-item name="About" :selected="true" ref="tabAbout">
           <div class="person-single__content">
             <div class="person-single__content-left">
               <div class="person-single__profile-image" v-if="hasImage">
                 <img :src="person.profile_path" />
               </div>
-              <div class="person-single__birhday" v-if="person.birthday">
-                {{ birthDay }}
-                <span v-if="!person.deathday">
-                  - {{ `${age} years old` }}
-                </span>
+              <div
+                class="person-single__birhday person-single__label-value"
+                v-if="person.birthday"
+              >
+                <div class="person-single__label">
+                  Birthday
+                </div>
+                <div class="person-single__value">
+                  {{ birthDay }}
+                  <span v-if="!person.deathday">({{ `age ${age}` }})</span>
+                </div>
               </div>
               <div class="person-single__death-day" v-if="person.deathday">
                 {{ person.deathday }}
               </div>
               <div
-                class="person-single__place-of-birth"
+                class="person-single__place-of-birth person-single__label-value"
                 v-if="person.place_of_birth"
               >
-                Born in: {{ person.place_of_birth }}
+                <div class="person-single__label">
+                  Born in
+                </div>
+                <div class="person-single__value">
+                  {{ person.place_of_birth }}
+                </div>
               </div>
-              <div class="person-single__gender">
-                Gender: {{ person.gender }}
+              <div
+                class="person-single__gender person-single__label-value"
+                v-if="person.gender"
+              >
+                <div class="person-single__label">
+                  Gender
+                </div>
+                <div class="person-single__value" v-if="personGender">
+                  {{ personGender.value }}
+                </div>
               </div>
-              <div class="person-single__homepage" v-if="person.homepage">
-                <a :href="person.homepage" target="_blank">{{ 'Homepage' }}</a>
+              <div
+                class="person-single__homepage person-single__label-value"
+                v-if="person.homepage"
+              >
+                <div class="person-single__label">
+                  Links
+                </div>
+                <div class="person-single__value">
+                  <a :href="person.homepage" target="_blank">{{ 'Website' }}</a>
+                </div>
               </div>
-              <div class="person-single__popularity" v-if="person.popularity">
-                {{ person.popularity }}
+              <div
+                class="person-single__popularity person-single__label-value"
+                v-if="person.popularity"
+              >
+                <div class="person-single__label">
+                  Popularity
+                </div>
+                <div class="person-single__value">
+                  {{ person.popularity }}
+                </div>
               </div>
             </div>
             <div class="person-single__content-right">
@@ -56,6 +92,27 @@
                 v-if="person.biography"
                 v-html="biographyCredited"
               ></div>
+              <div class="person-single__known-for">
+                <div class="person-single__label">
+                  Known for
+                </div>
+                <div class="person-single__known-for-movies">
+                  <div class="movies__all">
+                    <div
+                      class="movies__all-movie"
+                      v-for="credit in knownForMovies"
+                    >
+                      <movie-teaser
+                        :movie="credit"
+                        v-if="credit.poster_path"
+                      ></movie-teaser>
+                    </div>
+                  </div>
+                  <div class="movies__all-link" @click="showCredits">
+                    Show all filmography
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </el-tab-item>
@@ -72,7 +129,7 @@ import ElTabItem from '../components/elements/tabs/ElTabItem';
 import ElTabs from '../components/elements/tabs/ElTabs';
 import MovieTeaser from '../components/MovieTeaser';
 // models
-import Movie from '../models/Movie';
+import Gender from '../models/Gender';
 
 export default {
   name: 'PersonDetail',
@@ -92,9 +149,6 @@ export default {
       return this.person.credits.cast.sort(
         (a, b) => b['popularity'] - a['popularity']
       );
-    },
-    movie(id) {
-      return Movie.getDetails(id);
     },
     birthDay() {
       return moment(this.person.birthday).format('D. MMMM Y');
@@ -118,8 +172,22 @@ export default {
     },
     hasImage() {
       return !!this.person.images.profiles.length;
+    },
+    personGender() {
+      return Gender.getGender(this.person.gender);
+    },
+    knownForMovies() {
+      return this.castCredit.slice(0, 5);
     }
   },
-  mounted() {}
+  methods: {
+    showCredits() {
+      this.$refs.tabCredits.isActive = true;
+      this.$refs.tabAbout.isActive = false;
+    }
+  },
+  mounted() {
+    Gender.fetch();
+  }
 };
 </script>

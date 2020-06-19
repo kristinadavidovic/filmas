@@ -23,6 +23,7 @@
 </template>
 
 <script>
+// 3rd
 import moment from 'moment';
 
 export default {

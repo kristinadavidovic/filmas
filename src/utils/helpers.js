@@ -18,8 +18,6 @@ export const getImages = async data => {
     secure_base_url: baseURL
   } = images;
 
-  // console.log('🧚‍♂️', images);
-
   results.push(data);
   results = results.flat();
 
@@ -28,9 +26,15 @@ export const getImages = async data => {
     const posterPath = result['poster_path'];
     const backdropPath = result['backdrop_path'];
     const profilePath = result['profile_path'];
-    result['backdrop_path'] = `${baseURL}${backdropSize[3]}${backdropPath}`;
-    result['poster_path'] = `${baseURL}${posterSize[3]}${posterPath}`;
-    result['profile_path'] = `${baseURL}${profileSize[3]}${profilePath}`;
+    result['backdrop_path'] = backdropPath
+      ? `${baseURL}${backdropSize[3]}${backdropPath}`
+      : null;
+    result['poster_path'] = posterPath
+      ? `${baseURL}${posterSize[3]}${posterPath}`
+      : null;
+    result['profile_path'] = profilePath
+      ? `${baseURL}${profileSize[3]}${profilePath}`
+      : null;
   });
 
   return results;

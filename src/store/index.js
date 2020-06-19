@@ -6,8 +6,8 @@ import VuexORM from '@vuex-orm/core';
 import Movie from '../models/Movie';
 import MovieTrending from '../models/MovieTrending';
 import Genre from '../models/Genre';
-import MovieGenre from '../models/MovieGenre';
 import Person from '../models/Person';
+import Gender from '../models/Gender';
 
 Vue.use(Vuex);
 
@@ -18,8 +18,8 @@ const database = new VuexORM.Database();
 database.register(Movie);
 database.register(MovieTrending);
 database.register(Genre);
-database.register(MovieGenre);
 database.register(Person);
+database.register(Gender);
 
 const store = new Vuex.Store({
   plugins: [VuexORM.install(database)],

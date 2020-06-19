@@ -111,11 +111,19 @@
     width: 100%;
     border-bottom: 1px dotted $color-casper;
   }
+
+  .movie-detail__crew & {
+    color: $color-white;
+  }
 }
 
 .movie-detail__person-role {
   grid-column: 2;
   font-weight: $font-weight-extra-light;
+
+  .movie-detail__crew & {
+    color: $color-pattens-blue;
+  }
 }
 
 // More Details

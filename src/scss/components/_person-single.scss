@@ -48,13 +48,59 @@
   overflow: hidden;
 }
 
+// Info
+.person-single__label-value {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-column-gap: 10px;
+  align-items: end;
+  padding-bottom: 10px;
+  border-bottom: $border-default--dotted;
+  margin-bottom: 20px;
+}
+
+.person-single__label {
+  @extend %textSmall;
+  grid-column: 1;
+  color: $color-casper;
+  text-transform: uppercase;
+}
+
+.person-single__value {
+  grid-column: 2;
+
+  span {
+    @extend %textSmall;
+    color: $color-casper;
+  }
+}
+
 // Biography
 .person-single__biography {
   white-space: pre-line;
+
+  &:not(:last-child) {
+    margin-bottom: 40px;
+  }
 }
 
 .person-single__biography-credit {
   margin-top: 30px;
   color: $color-pattens-blue--03;
   text-align: right;
+}
+
+// Known for
+.person-single__known-for-movies {
+  display: flex;
+  flex-wrap: wrap;
+
+  .movies__all {
+    margin-top: 10px;
+  }
+
+  .movies__all-link {
+    display: inline-block;
+    margin-left: auto;
+  }
 }

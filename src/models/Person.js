@@ -36,7 +36,10 @@ class Person extends Model {
     if (!response) return;
 
     let { data } = response;
+    let { cast } = data.credits; // eslint-disable-line no-unused-vars
+
     data = await getImages(data);
+    cast = await getImages(cast);
 
     Person.insert({ data });
   }
