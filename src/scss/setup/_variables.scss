@@ -40,9 +40,14 @@ $easing-default: ease-out;
 
 // spacings
 $margin-heading-default: 2.75rem 0 1.05rem;
+$movie-spacing: 10px;
+
+// border
+$border-radius-default: 5px;
+$border-radius-medium: 10px;
+$border-default: 1px solid $color-pattens-blue--03;
 
 // other
-$border-radius-default: 5px;
 $movie-fade-gradient: linear-gradient(
     0deg,
     rgba(30, 35, 40, 0) 60%,

@@ -2,7 +2,7 @@
   position: relative;
   overflow: hidden;
   border-radius: $border-radius-default;
-  border: 1px solid $color-pattens-blue--03;
+  border: $border-default;
 }
 
 .movie-teaser__item-link {

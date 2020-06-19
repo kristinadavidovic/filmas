@@ -37,17 +37,6 @@
             </div>
           </div>
           <div class="movie-detail__title-wrapper">
-            <div class="movie-detail__directors">
-              Directed by:
-              <span v-if="directors" v-for="director in directors">
-                <router-link
-                  :to="{ name: 'person', params: { personId: director.id } }"
-                  class="movie-detail__person-name"
-                >
-                  {{ director.name }}
-                </router-link>
-              </span>
-            </div>
             <h1 class="movie-detail__title">
               {{ movie.title }}
             </h1>
@@ -65,8 +54,10 @@
           </div>
 
           <!-- Cast & Crew & Info -->
+          <!-- TODO: add links to more info seperate pages -->
           <el-tabs>
-            <el-tab-item name="🤿 Cast" :selected="false">
+            <!-- Cast -->
+            <el-tab-item name="🤿 Cast" :selected="true">
               <div class="movie-detail__cast">
                 <div class="movie-detail__people">
                   <div
@@ -87,7 +78,10 @@
                 </div>
               </div>
             </el-tab-item>
-            <el-tab-item name="📽️ Crew" :selected="true">
+            <!-- /Cast -->
+
+            <!-- Crew -->
+            <el-tab-item name="📽️ Crew">
               <div class="movie-detail__crew text--small">
                 <el-tabs>
                   <template v-for="(persons, key, idx) in movieCrew">
@@ -116,28 +110,53 @@
                 </el-tabs>
               </div>
             </el-tab-item>
+            <!-- /Crew -->
+
+            <!-- More Info -->
             <el-tab-item name="ℹ️ More info">
-              <div class="movie-detail__more-details">
-                <div
-                  v-for="company in movie.production_companies"
-                  :key="company.id"
-                >
-                  {{ company.name }}
+              <div class="movie-detail__more-details text--small">
+                <div class="movie-detail__production-companies">
+                  <h5>
+                    {{ 'Production companies:' }}
+                  </h5>
+                  <ul>
+                    <li
+                      v-for="company in movie.production_companies"
+                      :key="company.id"
+                    >
+                      {{ company.name }}
+                    </li>
+                  </ul>
                 </div>
-                <div
-                  v-for="country in movie.production_countries"
-                  :key="country.id"
-                >
-                  {{ country.name }}
+                <div class="movie-detail__production-countries">
+                  <h5>
+                    {{ 'Production countries:' }}
+                  </h5>
+                  <ul>
+                    <li
+                      v-for="country in movie.production_countries"
+                      :key="country.id"
+                    >
+                      {{ country.name }}
+                    </li>
+                  </ul>
                 </div>
-                <div
-                  v-for="lang in movie.spoken_languages"
-                  :key="lang.iso_639_1"
-                >
-                  {{ lang.name }}
+                <div class="movie-detail__spoken-languages">
+                  <h5>
+                    {{ 'Spoken languages:' }}
+                  </h5>
+                  <ul>
+                    <li
+                      v-for="lang in movie.spoken_languages"
+                      :key="lang.iso_639_1"
+                    >
+                      {{ lang.name }}
+                    </li>
+                  </ul>
                 </div>
               </div>
             </el-tab-item>
+            <!-- /More Info -->
           </el-tabs>
           <!-- / Cast & Crew & Info -->
         </div>
@@ -200,9 +219,6 @@ export default {
         r[a.department].push(a);
         return r;
       }, {});
-    },
-    directors() {
-      return this.movieCrew['Directing'];
     }
   },
   mounted() {

@@ -57,7 +57,8 @@ const routes = [
   {
     path: '/person/:personId',
     name: ROUTE_PERSON,
-    component: PersonSingle
+    component: PersonSingle,
+    props: true
   }
 ];
 

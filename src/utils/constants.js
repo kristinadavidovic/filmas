@@ -10,6 +10,7 @@ export const API_ENDPOINT_GENRES = 'genre/movie/list';
 export const API_ENDPOINT_MOVIE_DETAILS = 'movie';
 export const API_ENDPOINT_MOVIE_DISCOVER = 'discover/movie';
 export const API_ENDPOINT_MOVIE_TRENDING_WEEK = 'trending/movie/week';
+export const API_ENDPOINT_PERSON = 'person';
 
 // routes
 export const ROUTE_ABOUT = 'about';

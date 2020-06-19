@@ -19,7 +19,7 @@ class Movie extends Model {
     // todo: fix referenced fields (arrays)
     // todo: add belongs to collection (HP npr.)
     return {
-      id: this.attr(null),
+      id: this.number(null),
       adult: this.boolean(false),
       backdrop_path: this.string(null),
       belongs_to_collection: this.attr(null),
@@ -73,13 +73,18 @@ class Movie extends Model {
     //? Movie.store().dispatch('wait/end', LOADER_FETCH_MOVIES);
   }
 
+  // TODO: This should be find only. The getting of the movies
+  // needs to get the genres & credits as well & inserted into the store.
   static async fetchDetails(id) {
     const response = await api.get(
       `${API_ENDPOINT_MOVIE_DETAILS}/${id}${API_KEY}&append_to_response=credits`
     );
+    if (!response) return;
     let { data } = response;
 
     data = await getImages(data);
+
+    console.log('🚀', data);
 
     Movie.insert({
       data
