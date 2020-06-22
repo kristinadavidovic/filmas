@@ -24,11 +24,14 @@ class Genre extends Model {
     const { data } = response;
     const { genres } = data;
 
-    // console.log('⭐', genres);
-
     Genre.insert({
       data: genres
     });
+  }
+
+  // getters
+  static getGenre(id) {
+    return Genre.find(id);
   }
 }
 

@@ -1,9 +1,11 @@
 <template>
   <div class="movie-detail">
-    <div class="movie-detail__backdrop">
+    <div class="movie-detail__backdrop" v-if="movie.backdrop_path != 'null'">
       <div
         class="movie-detail__backdrop-image"
         :style="`backgroundImage: url('${movie.backdrop_path}')`"
+        ref="backdropImage"
+        id="backdrop-image"
       ></div>
       <div class="movie-detail__backdrop-fade"></div>
     </div>
@@ -23,13 +25,20 @@
         </div>
         <div class="movie-detail__info movie-detail__info--right">
           <div class="movie-detail__meta">
-            <div class="movie-detail__release-date">📆 {{ releaseDate }}</div>
-            <div class="movie-detail__runtime">⏲️ {{ runtime }}</div>
+            <div class="movie-detail__release-date">
+              <fa-icon :icon="isReleased ? 'calendar-check' : 'calendar'" />
+              {{ releaseDate }}
+            </div>
+            <div class="movie-detail__runtime">
+              <fa-icon icon="clock" />
+              {{ runtime }}
+            </div>
             <div class="movie-detail__genres">
               <template v-for="genre in movie.genres">
                 <router-link
                   :to="{ name: 'genre', params: { genreId: genre.id } }"
                   :key="genre.id"
+                  class="movie-detail__genre"
                 >
                   {{ genre.name }}
                 </router-link>
@@ -45,6 +54,9 @@
             </span>
           </div>
           <div class="movie-detail__tagline" v-if="movie.tagline">
+            <sup>
+              <fa-icon icon="quote-left" />
+            </sup>
             {{ movie.tagline }}
           </div>
           <div class="movie-detail__overview" v-if="movie.overview">
@@ -57,7 +69,7 @@
           <!-- TODO: add links to more info seperate pages -->
           <el-tabs>
             <!-- Cast -->
-            <el-tab-item name="🤿 Cast" :selected="true">
+            <el-tab-item name="Cast" :selected="true">
               <div class="movie-detail__cast">
                 <div class="movie-detail__people">
                   <div
@@ -81,9 +93,9 @@
             <!-- /Cast -->
 
             <!-- Crew -->
-            <el-tab-item name="📽️ Crew">
+            <el-tab-item name="Crew">
               <div class="movie-detail__crew text--small">
-                <el-tabs>
+                <el-tabs :vertical="true">
                   <template v-for="(persons, key, idx) in movieCrew">
                     <el-tab-item :name="key" :selected="idx == 0">
                       <div class="movie-detail__people">
@@ -113,7 +125,7 @@
             <!-- /Crew -->
 
             <!-- More Info -->
-            <el-tab-item name="ℹ️ More info">
+            <el-tab-item name="More info">
               <div class="movie-detail__more-details text--small">
                 <div class="movie-detail__production-companies">
                   <h5>
@@ -203,6 +215,9 @@ export default {
     releaseDate() {
       return moment(this.movie.release_date).format('DD. MM. Y');
     },
+    isReleased() {
+      return moment(this.releaseDate).diff(moment());
+    },
     runtime() {
       const hours = this.movie.runtime / 60;
       const rhours = Math.floor(hours);
@@ -220,6 +235,19 @@ export default {
         return r;
       }, {});
     }
+  },
+  methods: {
+    parallax() {
+      let bgImage = document.querySelector('#backdrop-image');
+      let scrolltop = window.pageYOffset;
+      bgImage.style &&
+        (bgImage.style.backgroundPosition = `0% ${-scrolltop * 0.5}%`);
+    }
+  },
+  created() {
+    // document.addEventListener('scroll', () => {
+    //   requestAnimationFrame(this.parallax);
+    // });
   },
   mounted() {
     Genre.fetch();

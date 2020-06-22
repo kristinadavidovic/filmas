@@ -84,6 +84,20 @@ hr {
   margin: 40px auto 50px;
 }
 
+sup,
+sub {
+  font-size: smaller;
+  line-height: initial;
+}
+
+sup {
+  vertical-align: super;
+}
+
+sub {
+  vertical-align: sub;
+}
+
 .content {
   padding: 40px 0 50px;
 }

@@ -52,7 +52,8 @@ const routes = [
   {
     path: '/movies/list/genres/:genreId',
     name: ROUTE_GENRE,
-    component: ListsGenre
+    component: ListsGenre,
+    props: true
   },
   {
     path: '/person/:personId',

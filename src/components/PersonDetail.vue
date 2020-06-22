@@ -7,7 +7,7 @@
         </h1>
       </div>
       <el-tabs>
-        <el-tab-item name="Credits" ref="tabCredits">
+        <el-tab-item :name="`Credits (${castCredit.length})`" ref="tabCredits">
           <!-- add crew credits -->
           <div class="person-single__credits">
             <div
@@ -38,8 +38,17 @@
                   <span v-if="!person.deathday">({{ `age ${age}` }})</span>
                 </div>
               </div>
-              <div class="person-single__death-day" v-if="person.deathday">
-                {{ person.deathday }}
+              <div
+                class="person-single__death-day person-single__label-value"
+                v-if="person.deathday"
+              >
+                <div class="person-single__label">
+                  Day of Death
+                </div>
+                <div class="person-single__value">
+                  {{ deathDay }}
+                  <span>({{ `aged ${diedAt}` }})</span>
+                </div>
               </div>
               <div
                 class="person-single__place-of-birth person-single__label-value"
@@ -159,6 +168,12 @@ export default {
     age() {
       return moment().diff(this.person.birthday, 'years');
     },
+    diedAt() {
+      return moment(this.person.deathday).diff(
+        moment(this.person.birthday),
+        'years'
+      );
+    },
     biographyCredited() {
       const bio = this.person.biography.split('\n');
       const last = bio[bio.length - 1];
@@ -177,7 +192,9 @@ export default {
       return Gender.getGender(this.person.gender);
     },
     knownForMovies() {
-      return this.castCredit.slice(0, 5);
+      return this.castCredit
+        .filter(movie => movie.poster_path != null)
+        .slice(0, 5);
     }
   },
   methods: {

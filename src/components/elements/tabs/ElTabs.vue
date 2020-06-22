@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs">
+  <div class="tabs" :class="{ 'tabs--vertical': vertical }">
     <div class="tabs__header">
       <div
         class="tabs__header-item text--small"
@@ -20,6 +20,12 @@
 <script>
 export default {
   name: 'el-tabs',
+  props: {
+    vertical: {
+      type: Boolean,
+      required: false
+    }
+  },
   data() {
     return {
       tabs: []

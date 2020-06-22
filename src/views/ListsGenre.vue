@@ -1,5 +1,5 @@
 <template>
-  <list-genres></list-genres>
+  <list-genres :genreId="genreId"></list-genres>
 </template>
 
 <script>
@@ -10,6 +10,7 @@ export default {
   name: 'ListsGenre',
   components: {
     ListGenres
-  }
+  },
+  props: ['genreId']
 };
 </script>

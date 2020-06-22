@@ -89,6 +89,30 @@ class Movie extends Model {
     });
   }
 
+  static async fetchByGenre(genreId) {
+    const movies = [];
+
+    const apiString = pageNum =>
+      `${API_ENDPOINT_MOVIE_DISCOVER}${API_KEY}&with_genres=${genreId}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${pageNum}`;
+    // const getPages = env('movies-pages');
+    const getPages = 5;
+
+    // TODO: can we improve this?
+    // get genres here
+    for (let i = 1; i <= getPages; i++) {
+      const response = await api.get(apiString(i));
+      if (!response) return;
+      const { data } = response;
+      let { results } = data;
+      results = await getImages(results);
+      movies.push(results);
+    }
+
+    Movie.insert({
+      data: movies.flat()
+    });
+  }
+
   // getters
   static getAll() {
     return Movie.query()
