@@ -18,9 +18,34 @@
               :alt="`${movie.title} poster image`"
             />
           </div>
-          <div class="movie-detail__rating">
-            <!-- todo: improve ratings display? -->
-            {{ movie.vote_average }} / {{ movie.vote_count }}
+          <div
+            class="movie-detail__rating"
+            v-if="movie.vote_average || movie.vote_count"
+          >
+            <div class="movie-detail__rating-avg">
+              <div class="movie-detail__rating-avg-stars">
+                <div
+                  class="movie-detail__rating--upper"
+                  :style="`width: ${movie.vote_average * 10}%`"
+                >
+                  <span v-for="star in 10"><fa-icon icon="star"/></span>
+                </div>
+                <div class="movie-detail__rating--lower">
+                  <span v-for="star in 10"><fa-icon icon="star"/></span>
+                </div>
+              </div>
+              <div class="movie-detail__rating-avg-text h3">
+                {{ movie.vote_average }}
+              </div>
+            </div>
+            <div class="movie-detail__rating-all">
+              <div class="h5">
+                {{ movie.vote_count }}
+              </div>
+              <div class="text--small">
+                votes
+              </div>
+            </div>
           </div>
         </div>
         <div class="movie-detail__info movie-detail__info--right">
@@ -31,7 +56,10 @@
             </div>
             <div class="movie-detail__runtime">
               <fa-icon icon="clock" />
-              {{ runtime }}
+              <template v-if="movie.runtime">
+                {{ runtime }}
+              </template>
+              <template v-else>TBD</template>
             </div>
             <div class="movie-detail__genres">
               <template v-for="genre in movie.genres">
@@ -127,7 +155,10 @@
             <!-- More Info -->
             <el-tab-item name="More info">
               <div class="movie-detail__more-details text--small">
-                <div class="movie-detail__production-companies">
+                <div
+                  class="movie-detail__production-companies"
+                  v-if="movie.production_companies.length"
+                >
                   <h5>
                     {{ 'Production companies:' }}
                   </h5>
@@ -140,7 +171,10 @@
                     </li>
                   </ul>
                 </div>
-                <div class="movie-detail__production-countries">
+                <div
+                  class="movie-detail__production-countries"
+                  v-if="movie.production_countries.length"
+                >
                   <h5>
                     {{ 'Production countries:' }}
                   </h5>
@@ -153,7 +187,10 @@
                     </li>
                   </ul>
                 </div>
-                <div class="movie-detail__spoken-languages">
+                <div
+                  class="movie-detail__spoken-languages"
+                  v-if="movie.spoken_languages.length"
+                >
                   <h5>
                     {{ 'Spoken languages:' }}
                   </h5>
@@ -216,7 +253,7 @@ export default {
       return moment(this.movie.release_date).format('DD. MM. Y');
     },
     isReleased() {
-      return moment(this.releaseDate).diff(moment());
+      return moment().diff(moment(this.movie.release_date)) > 0;
     },
     runtime() {
       const hours = this.movie.runtime / 60;

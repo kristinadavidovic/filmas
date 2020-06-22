@@ -7,15 +7,23 @@ import store from './store';
 // icons
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-  faCalendarCheck,
   faCalendar,
+  faCalendarCheck,
   faClock,
+  faInfoCircle,
   faQuoteLeft,
-  faInfoCircle
+  faStar
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(faCalendarCheck, faCalendar, faClock, faQuoteLeft, faInfoCircle);
+library.add(
+  faCalendar,
+  faCalendarCheck,
+  faClock,
+  faInfoCircle,
+  faQuoteLeft,
+  faStar
+);
 
 Vue.component('fa-icon', FontAwesomeIcon);
 

@@ -73,6 +73,48 @@
   padding-left: 40px;
 }
 
+.movie-detail__rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30px;
+  color: $color-casper;
+}
+
+.movie-detail__rating-avg {
+  display: flex;
+  align-items: center;
+}
+
+.movie-detail__rating-avg-stars {
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+  unicode-bidi: bidi-override;
+  color: $color-bright-gray;
+  font-size: 20px;
+}
+
+.movie-detail__rating--upper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  color: $color-aquamarine;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.movie-detail__rating-all {
+  padding: 10px;
+  border-left: 1px solid $color-casper;
+  margin-left: 10px;
+  line-height: 1;
+  font-family: $font-chivo;
+  font-weight: $font-weight-extra-light;
+  text-align: center;
+}
+
 .movie-detail__meta {
   display: flex;
   padding-bottom: 20px;
